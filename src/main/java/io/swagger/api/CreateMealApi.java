@@ -5,12 +5,12 @@
  */
 package io.swagger.api;
 
-import org.threeten.bp.LocalDate;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalTime;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-06T09:36:55.180Z")
@@ -18,13 +18,13 @@ import org.threeten.bp.LocalTime;
 @Api(value = "create-meal", description = "the create-meal API")
 public interface CreateMealApi {
 
-    @ApiOperation(value = "creates a meal", nickname = "createMeal", notes = "By passing in a Date, Time, Description (optional) and Number of calories,  you can create a meal entry in your diary. ", tags={ "developers", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "meal created"),
-        @ApiResponse(code = 400, message = "invalid input, parameters invalid") })
+    @ApiOperation(value = "creates a meal", nickname = "createMeal", notes = "By passing in a Date, Time, Description (optional) and Number of calories,  you can create a meal entry in your diary. ", tags = {"developers",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "meal created"),
+            @ApiResponse(code = 400, message = "invalid input, parameters invalid")})
     @RequestMapping(value = "/create-meal",
-        produces = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Void> createMeal(@ApiParam(value = "Date of meal" ,required=true) @RequestHeader(value="mealDate", required=true) LocalDate mealDate, @ApiParam(value = "Time of meal" ,required=true) @RequestHeader(value="mealTime", required=true) LocalTime mealTime, @ApiParam(value = "Number of calories of the meal" ,required=true) @RequestHeader(value="numberOfCalories", required=true) Integer numberOfCalories, @ApiParam(value = "Description of the meal" ) @RequestHeader(value="mealDescription", required=false) String mealDescription);
+            produces = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<Void> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestHeader(value = "mealDate", required = true) LocalDate mealDate, @ApiParam(value = "Time of meal", required = true) @RequestHeader(value = "mealTime", required = true) LocalTime mealTime, @ApiParam(value = "Number of calories of the meal", required = true) @RequestHeader(value = "numberOfCalories", required = true) Integer numberOfCalories, @ApiParam(value = "Description of the meal") @RequestHeader(value = "mealDescription", required = false) String mealDescription);
 
 }

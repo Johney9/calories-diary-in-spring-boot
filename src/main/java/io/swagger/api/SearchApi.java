@@ -5,34 +5,28 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.Meal;
 import io.swagger.annotations.*;
+import io.swagger.model.Meal;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-06T09:36:55.180Z")
 
 @Api(value = "search", description = "the search API")
 public interface SearchApi {
 
-    @ApiOperation(value = "searches meals based on description", nickname = "search", notes = "aoeu ", response = Meal.class, responseContainer = "List", tags={ "developers", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "results matching criteria", response = Meal.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "Invalid description value") })
+    @ApiOperation(value = "searches meals based on description", nickname = "search", notes = "aoeu ", response = Meal.class, responseContainer = "List", tags = {"developers",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "results matching criteria", response = Meal.class, responseContainer = "List"),
+            @ApiResponse(code = 400, message = "Invalid description value")})
     @RequestMapping(value = "/search",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+            produces = {"application/json"},
+            method = RequestMethod.GET)
     ResponseEntity<List<Meal>> search(@ApiParam(value = "description value to be searched") @Valid @RequestParam(value = "description", required = false) String description);
 
 }
