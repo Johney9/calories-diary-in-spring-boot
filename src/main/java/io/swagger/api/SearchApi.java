@@ -20,7 +20,7 @@ import java.util.List;
 @Api(value = "search", description = "the search API")
 public interface SearchApi {
 
-    @ApiOperation(value = "searches meals based on description", nickname = "search", notes = "aoeu ", response = Meal.class, responseContainer = "List", tags = {"developers",})
+    @ApiOperation(value = "searches meals based on description", nickname = "search", notes = "By passing in a description, the service will return every meal that has such a description", response = Meal.class, responseContainer = "List", tags = {"developers",})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "results matching criteria", response = Meal.class, responseContainer = "List"),
             @ApiResponse(code = 400, message = "Invalid description value")})

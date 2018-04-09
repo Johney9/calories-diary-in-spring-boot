@@ -32,7 +32,10 @@ public class CreateMealApiController implements CreateMealApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestHeader(value = "mealDate", required = true) LocalDate mealDate, @ApiParam(value = "Time of meal", required = true) @RequestHeader(value = "mealTime", required = true) LocalTime mealTime, @ApiParam(value = "Number of calories of the meal", required = true) @RequestHeader(value = "numberOfCalories", required = true) Integer numberOfCalories, @ApiParam(value = "Description of the meal") @RequestHeader(value = "mealDescription", required = false) String mealDescription) {
+    public ResponseEntity<Void> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestHeader(value = "mealDate", required = true) LocalDate mealDate,
+                                           @ApiParam(value = "Time of meal", required = true) @RequestHeader(value = "mealTime", required = true) LocalTime mealTime,
+                                           @ApiParam(value = "Number of calories of the meal", required = true) @RequestHeader(value = "numberOfCalories", required = true) Integer numberOfCalories,
+                                           @ApiParam(value = "Description of the meal") @RequestHeader(value = "mealDescription", required = false) String mealDescription) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }

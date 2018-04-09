@@ -22,7 +22,7 @@ import java.util.List;
 @Api(value = "meals", description = "the meals API")
 public interface MealsApi {
 
-    @ApiOperation(value = "lists all dates that have meals", nickname = "listDatesWithMeals", notes = "bla bla bla, violent torrent ", response = LocalDate.class, responseContainer = "List", tags = {"developers",})
+    @ApiOperation(value = "lists all dates that have meals", nickname = "listDatesWithMeals", notes = "Returns a list of all days from today, to the last future date which have planned meals.", response = LocalDate.class, responseContainer = "List", tags = {"developers",})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "results matching criteria", response = LocalDate.class, responseContainer = "List")})
     @RequestMapping(value = "/meals",
