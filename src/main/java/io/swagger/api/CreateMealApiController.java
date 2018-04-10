@@ -2,18 +2,21 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.model.Meal;
+import io.swagger.repository.MealRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalTime;
 
 import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-06T09:36:55.180Z")
 
@@ -27,17 +30,29 @@ public class CreateMealApiController implements CreateMealApi {
     private final HttpServletRequest request;
 
     @Autowired
+    private MealRepository mealRepository;
+
+    @Autowired
     public CreateMealApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestHeader(value = "mealDate", required = true) LocalDate mealDate,
-                                           @ApiParam(value = "Time of meal", required = true) @RequestHeader(value = "mealTime", required = true) LocalTime mealTime,
+    public ResponseEntity<Meal> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestHeader(value = "mealDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String mealDate,
+                                           @ApiParam(value = "Time of meal", required = true) @RequestHeader(value = "mealTime", required = true) @DateTimeFormat(pattern = "HH:MM:SS") String mealTime,
                                            @ApiParam(value = "Number of calories of the meal", required = true) @RequestHeader(value = "numberOfCalories", required = true) Integer numberOfCalories,
                                            @ApiParam(value = "Description of the meal") @RequestHeader(value = "mealDescription", required = false) String mealDescription) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        if(accept != null && accept.contains("application/json")) {
+            Meal meal = new Meal();
+            meal.setMealDate(LocalDate.parse(mealDate));
+            meal.setMealTime(LocalTime.parse(mealTime));
+            meal.setMealDescription(mealDescription);
+            meal.setNumberOfCalories(numberOfCalories);
+            meal = mealRepository.save(meal);
+            return new ResponseEntity<Meal>(meal, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<Meal>(HttpStatus.BAD_REQUEST);
     }
 
 }
