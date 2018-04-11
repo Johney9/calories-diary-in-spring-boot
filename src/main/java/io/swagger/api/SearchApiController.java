@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,12 +41,14 @@ public class SearchApiController implements SearchApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
 
-            List<Meal> mealList = mealRepository.findAllMealsByMealDescriptionAndMealDateGreaterThan(description, LocalDate.now());
+            List<Meal> mealList = mealRepository.findAllMealsByMealDescription(description);
+            if(mealList.isEmpty())
+                return new ResponseEntity<List<Meal>>(HttpStatus.NOT_FOUND);
+
             return new ResponseEntity<List<Meal>>(mealList, HttpStatus.OK);
-            //return new ResponseEntity<List<Meal>>(objectMapper.readValue("[ {  \"mealTime\" : \"1162\",  \"numberOfCalories\" : 0,  \"mealDescription\" : \"mealDescription\",  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"mealDate\" : \"2018-02-13T00:00:00.000Z\"}, {  \"mealTime\" : \"1162\",  \"numberOfCalories\" : 0,  \"mealDescription\" : \"mealDescription\",  \"id\" : \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \"mealDate\" : \"2018-02-13T00:00:00.000Z\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
         }
 
-        return new ResponseEntity<List<Meal>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<List<Meal>>(HttpStatus.BAD_REQUEST);
     }
 
 }
