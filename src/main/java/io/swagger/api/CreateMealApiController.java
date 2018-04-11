@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
@@ -38,10 +39,10 @@ public class CreateMealApiController implements CreateMealApi {
         this.request = request;
     }
 
-    public ResponseEntity<Meal> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestHeader(value = "mealDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String mealDate,
-                                           @ApiParam(value = "Time of meal", required = true) @RequestHeader(value = "mealTime", required = true) @DateTimeFormat(pattern = "HH:MM:SS") String mealTime,
-                                           @ApiParam(value = "Number of calories of the meal", required = true) @RequestHeader(value = "numberOfCalories", required = true) Integer numberOfCalories,
-                                           @ApiParam(value = "Description of the meal") @RequestHeader(value = "mealDescription", required = false) String mealDescription) {
+    public ResponseEntity<Meal> createMeal(@ApiParam(value = "Date of meal", required = true) @RequestParam(value = "mealDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String mealDate,
+                                           @ApiParam(value = "Time of meal", required = true) @RequestParam(value = "mealTime", required = true) @DateTimeFormat(pattern = "HH:MM:SS") String mealTime,
+                                           @ApiParam(value = "Number of calories of the meal", required = true) @RequestParam(value = "numberOfCalories", required = true) Integer numberOfCalories,
+                                           @ApiParam(value = "Description of the meal") @RequestParam(value = "mealDescription", required = false) String mealDescription) {
         String accept = request.getHeader("Accept");
         if(accept != null && accept.contains("application/json")) {
             Meal meal = new Meal();
