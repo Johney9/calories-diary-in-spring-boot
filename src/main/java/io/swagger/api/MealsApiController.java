@@ -43,7 +43,7 @@ public class MealsApiController implements MealsApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
 
-            List<Meal> meals = mealRepository.findAllMealsByMealDateIsNotNullAndMealDateGreaterThanOrderByMealDateDesc(LocalDate.now());
+            List<Meal> meals = mealRepository.findAllMealsByMealDateIsNotNullAndMealDateGreaterThanEqualOrderByMealDateDesc(LocalDate.now());
             if (meals.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
