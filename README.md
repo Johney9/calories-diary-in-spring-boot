@@ -4,8 +4,8 @@ Spring Boot Server
 
 ## About
 This app serves as a calory diary. The user can:
-* add meals for a specific day and time,
-* search for meals by description,
+* add meals for a specific day and time (meal includes day, time, description (optional), calory count)
+* search for meals by description
 * list all present and future days that have meals (sorted by date descending, showing total calory count for that day, and if the calory limit was exceeded)
 
 ## Overview  
