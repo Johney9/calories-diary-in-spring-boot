@@ -9,13 +9,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.dto.DateMealCalorieLimitDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Generated;
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
+import java.util.List;
 
 @Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-06T09:36:55.180Z")
 
@@ -28,6 +29,6 @@ public interface MealsApi {
     @RequestMapping(value = "/meals",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<LinkedHashMap<LocalDate, Integer>> listDatesWithMeals();
+    ResponseEntity<List<DateMealCalorieLimitDTO>> listDatesWithMeals();
 
 }
