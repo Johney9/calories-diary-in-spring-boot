@@ -38,6 +38,24 @@ public class Meal {
     @JsonProperty("numberOfCalories")
     private Integer numberOfCalories = null;
 
+    public Meal(LocalDate mealDate, LocalTime mealTime, String mealDescription, Integer numberOfCalories) {
+        this.mealDate = mealDate;
+        this.mealTime = mealTime;
+        this.mealDescription = mealDescription;
+        this.numberOfCalories = numberOfCalories;
+    }
+
+    public Meal(UUID id, LocalDate mealDate, LocalTime mealTime, String mealDescription, Integer numberOfCalories) {
+        this.id = id;
+        this.mealDate = mealDate;
+        this.mealTime = mealTime;
+        this.mealDescription = mealDescription;
+        this.numberOfCalories = numberOfCalories;
+    }
+
+    public Meal() {
+    }
+
     public Meal id(UUID id) {
         this.id = id;
         return this;
