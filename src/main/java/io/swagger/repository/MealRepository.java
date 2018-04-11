@@ -9,6 +9,7 @@ import java.util.List;
 public interface MealRepository extends CrudRepository<Meal, Long> {
 
     List<Meal> findAllMealsByMealDescription(String mealDescription);
+
     List<Meal> findAllMealsByMealDateIsNotNullAndMealDateGreaterThanOrderByMealDateDesc(LocalDate today);
 
 }

@@ -14,7 +14,10 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-06T09:36:55.180Z")
 
@@ -41,7 +44,7 @@ public class MealsApiController implements MealsApi {
         if (accept != null && accept.contains("application/json")) {
 
             List<Meal> meals = mealRepository.findAllMealsByMealDateIsNotNullAndMealDateGreaterThanOrderByMealDateDesc(LocalDate.now());
-            if(meals.isEmpty())
+            if (meals.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
             Map sortedDates = squashMealDatesByCalorieCount(meals);
@@ -61,7 +64,7 @@ public class MealsApiController implements MealsApi {
             LocalDate mealDate = meal.getMealDate();
             int calorieCount = meal.getNumberOfCalories();
 
-            if(result.containsKey(mealDate)) {
+            if (result.containsKey(mealDate)) {
                 calorieCount += result.get(mealDate);
             }
             result.put(mealDate, calorieCount);
@@ -75,7 +78,7 @@ public class MealsApiController implements MealsApi {
 
         for (Map.Entry<LocalDate, Integer> entry : sortedDates.entrySet()) {
             boolean isOverCalorieLimit = false;
-            if(entry.getValue() > calorieLimit) {
+            if (entry.getValue() > calorieLimit) {
                 isOverCalorieLimit = true;
             }
             result.add(new DateMealCalorieLimitDTO(entry.getKey(), entry.getValue(), isOverCalorieLimit));

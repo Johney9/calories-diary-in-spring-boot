@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-06T09:36:55.180Z")
@@ -42,7 +41,7 @@ public class SearchApiController implements SearchApi {
         if (accept != null && accept.contains("application/json")) {
 
             List<Meal> mealList = mealRepository.findAllMealsByMealDescription(description);
-            if(mealList.isEmpty())
+            if (mealList.isEmpty())
                 return new ResponseEntity<List<Meal>>(HttpStatus.NOT_FOUND);
 
             return new ResponseEntity<List<Meal>>(mealList, HttpStatus.OK);

@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Generated;
@@ -43,7 +42,9 @@ public class CreateMealApiController implements CreateMealApi {
                                            @ApiParam(value = "Time of meal", required = true) @RequestParam(value = "mealTime", required = true) @DateTimeFormat(pattern = "HH:MM:SS") String mealTime,
                                            @ApiParam(value = "Number of calories of the meal", required = true) @RequestParam(value = "numberOfCalories", required = true) Integer numberOfCalories,
                                            @ApiParam(value = "Description of the meal") @RequestParam(value = "mealDescription", required = false) String mealDescription) {
+
         String accept = request.getHeader("Accept");
+
         if(accept != null && accept.contains("application/json")) {
             Meal meal = new Meal();
             meal.setMealDate(LocalDate.parse(mealDate));
@@ -51,8 +52,10 @@ public class CreateMealApiController implements CreateMealApi {
             meal.setMealDescription(mealDescription);
             meal.setNumberOfCalories(numberOfCalories);
             meal = mealRepository.save(meal);
+
             return new ResponseEntity<Meal>(meal, HttpStatus.CREATED);
         }
+
         return new ResponseEntity<Meal>(HttpStatus.BAD_REQUEST);
     }
 
